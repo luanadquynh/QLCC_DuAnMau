@@ -4,11 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * createAt Dec 24, 2020
- *
- * @author Đỗ Tuấn Anh <daclip26@gmail.com>
- */
 public abstract class Dao<T> {
 
     Connection conn = Database.getInstance().getConnection();
