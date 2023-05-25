@@ -12,37 +12,37 @@ import models.Building;
 public class BuildingDAO {
     
     public void insert(Building model){
-        String sql = "Insert into Building (Id_buidling, Name,Address, Image, Phone_number, Number_of_floor, Total_apartment,Email, Description,Trash, Status) VALUS (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "Insert into Building (id, nameBuilding, address, Image, phone, numberFloor, totalAparments,Email, description,Trash, Status) VALUS (?,?,?,?,?,?,?,?,?,?)";
         JdbcHelper.executeUpdate(sql,
-                model.getId_building(),
-                model.getName(),
-                model.getAddress(),
-                model.getImage(),
-                model.getPhone_number(),
-                model.getNumber_of_floor(),
-                model.getTotal_apartment(),
+                model.getid(),
+                model.getnameBuilding(),
+                model.getaddress(),
+                model.getimage(),
+                model.getphone(),
+                model.getnumberFloor(),
+                model.gettotalAparments(),
                 model.getEmail(),
-                model.getDescription(),
-                model.getTrash(),
-                model.getStatus());
+                model.getdescription(),
+                model.gettrash(),
+                model.getstatus());
     }
     public void update(Building model){
-        String sql = "Update Building Set (Name=?,Address = ?, Image = ?, Phone_number = ?, Number_of_floor = ?, Total_apartment = ?,Email = ?, Description= ?,Trash = ?, Status = ? Where Id_buiding = ?)";
+        String sql = "Update Building Set (nameBuilding=?,Address = ?, Image = ?, phone = ?, numberFloor = ?, totalApartment = ?,Email = ?, Description= ?,Trash = ?, Status = ? Where Id_buiding = ?)";
         JdbcHelper.executeUpdate(sql,
-                model.getId_building(),
-                model.getName(),
-                model.getAddress(),
-                model.getImage(),
-                model.getPhone_number(),
-                model.getNumber_of_floor(),
-                model.getTotal_apartment(),
-                model.getEmail(),
-                model.getDescription(),
-                model.getTrash(),
-                model.getStatus());
+                model.getid(),
+                model.getnameBuilding(),
+                model.getaddress(),
+                model.getimage(),
+                model.getphone(),
+                model.getnumberFloor(),
+                model.gettotalAparments(),
+                model.getemail(),
+                model.getdescription(),
+                model.gettrash(),
+                model.getstatus());
     }
     public void Delete(String Id_building){
-        String sql="DELETE FROM Building WHERE Id_building=?";
+        String sql="DELETE FROM Building WHERE Id=?";
         JdbcHelper.executeUpdate(sql, Id_building);
     }
     private List<Building> select(String sql, Object...args){
@@ -67,16 +67,16 @@ public class BuildingDAO {
     }
     private Building readFromResultSet(ResultSet rs) throws SQLException{
         Building model=new Building();
-        model.setId_building(rs.getString("Id_Building"));
-        model.setName(rs.getString("Name"));
-        model.setAddress(rs.getString("Address"));
-        model.setImage(rs.getString("Image"));
-        model.setPhone_number(rs.getInt("Phone_number"));
-        model.setNumber_of_floor(rs.getInt("Number_of_floor"));
-        model.setTotal_apartment(rs.getInt("Total_apartment"));
-        model.setDescription(rs.getString("Description"));
-        model.setTrash(rs.getInt("Trash"));      
-        model.setStatus(rs.getInt("Status"));
+        model.setId_building(rs.getString("id"));
+        model.setName(rs.getString("nameBuilding"));
+        model.setAddress(rs.getString("address"));
+        model.setImage(rs.getString("image"));
+        model.setPhone_number(rs.getInt("phone"));
+        model.setNumber_of_floor(rs.getInt("numberFloor"));
+        model.setTotal_apartment(rs.getInt("totalApartment"));
+        model.setDescription(rs.getString("description"));
+        model.setTrash(rs.getInt("trash"));      
+        model.setStatus(rs.getInt("status"));
         return model;
     }
     public List<Building> select(){
@@ -84,6 +84,6 @@ public class BuildingDAO {
         return select(sql);
     }
       public List<Building> selectByKeyword(String keyword){
-        String sql="SELECT * FROM Building WHERE Id_Building LIKE ?";
+        String sql="SELECT * FROM Building WHERE Id LIKE ?";
         return select(sql, "%"+keyword+"%");
     }
